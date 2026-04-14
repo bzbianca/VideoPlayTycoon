@@ -11,7 +11,10 @@
 - A tycoon game where you have to buy stock to then put up on shelves for sale. While helping customers find what they want through descriptions to make them buy your products.
 
 ### Stretch Goals
-- Using sets for certain areas in inventory such as TreeSet for most popular movie, to then create a randomly generated list for most popular video tapes for bigger profit. Another goal is to make a reviews system to where if your score becomes too low then its game over. To win the game, you must sell enough video tapes to be the #1 video rental store. If I were to have so much more time, might intregrate graphics making the game 2D.
+- Using sets for certain areas in inventory such as TreeSet for most popular movie, to then create a randomly generated list for most popular video tapes for bigger profit.
+- To make a reviews system to where if your score becomes too low then its game over.
+- To win the game, you must sell enough video tapes to be the #1 video rental store.
+- If I were to have so much more time, might intregrate graphics making the game 2D.
 
 ### Solo or Pair?
 - Solo
