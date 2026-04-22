@@ -6,38 +6,31 @@ class Movie implements Comparable<Movie> {
     private int popularity;
     private double price;
 
-    public Movie(String title, String genre, int popularity, double price) {
+    public Movie(String title, String genre, int popularity) {
         this.title = title;
         this.genre = genre;
         this.popularity = popularity;
-        this.price = price;
+
+        // Dynamic Pricing
+        if (popularity > 90) this.price = 85.0;
+        else if (popularity > 70) this.price = 60.0;
+        else if (popularity > 40) this.price = 35.0;
+        else this.price = 15.0;
     }
 
     public String getTitle() { return title; }
     public String getGenre() { return genre; }
-    public int getPopularity() { return popularity; }
     public double getPrice() { return price; }
 
     @Override
     public int compareTo(Movie other) {
-        if (this.popularity != other.popularity) {
-            return Integer.compare(other.popularity, this.popularity);
-        }
-        return this.title.compareTo(other.title);
+        return Integer.compare(other.popularity, this.popularity);
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %-25s | Price: $%.2f | Pop: %d", genre, title, price, popularity);
+        // Corrected padding for menu alignment
+        return String.format("%-12s | %-25s ... $%-6.2f (Pop: %d)",
+                "[" + genre + "]", title, price, popularity);
     }
-}
-
-class Box {
-    private List<Movie> movies = new ArrayList<>();
-    private List<Box> nestedBoxes = new ArrayList<>();
-
-    public void addMovie(Movie m) { movies.add(m); }
-    public void addBox(Box b) { nestedBoxes.add(b); }
-    public List<Movie> getMovies() { return movies; }
-    public List<Box> getNestedBoxes() { return nestedBoxes; }
 }
