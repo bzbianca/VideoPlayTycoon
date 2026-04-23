@@ -8,7 +8,18 @@ A strategic business simulation built in Java. Take on the role of a Video Store
 
 ### 1. Download ZIP File from the Github
 
-### 2. Project Structure
+### 2. Extract files from zip file, close any folders that are running in your IDE then drag folder into IDE
+
+### 3. Compilation
+Open your terminal in your IDE (Ex: Visual Studio), navigate to the folder containing the files, and run:
+
+javac *.java
+
+java GameEngine
+
+Note: Make sure you have java downloaded on your computer. 
+
+### Project Structure
 
 Ensure your project folder contains the following four Java files and this README:
 * `GameEngine.java` (The main controller and entry point)
@@ -16,14 +27,6 @@ Ensure your project folder contains the following four Java files and this READM
 * `Movie.java` (The data model for video tapes)
 * `Box.java` (The container for processing shipments)
 
-### 3. Compilation
-Open your terminal in your IDE, navigate to the folder containing the files, and run:
-
-javac *.java
-
-java GameEngine
-
-Note: Make sure you have java downloaded on your computer. 
 ---
 ## Goal: Reach 500 Reputation within 31 DAYS to impress Astra Yao!
 ---
