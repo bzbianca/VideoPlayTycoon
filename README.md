@@ -23,6 +23,7 @@ javac *.java
 
 java GameEngine
 
+Note: Make sure you have java downloaded on your computer. 
 ---
 ## Goal: Reach 500 Reputation within 31 DAYS to impress Astra Yao!
 ---
