@@ -43,8 +43,7 @@ Ensure your project folder contains the following four Java files and this READM
 * Side Quests: Small chance of random side quests to occur when opening the shop for the day.
 * Black Market: Takes up the entirety of the day. Take the risk of using your energy to buy valuable tapes or sell your low-priced tapes for double its value!
 
-
-
-
-
 ## Reach the value of $500 dollars with a reputation of 400 to receive the special achievement!
+
+### AI Usage
+This program is written 100% in AI. Only altered a few values, instructions and formatting. Dialogue, menu, calculations and everything else are made with Gemini AI.
