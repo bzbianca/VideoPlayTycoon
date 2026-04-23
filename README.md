@@ -22,3 +22,25 @@ Open your terminal in your IDE, navigate to the folder containing the files, and
 javac *.java
 
 java GameEngine
+
+---
+## Goal: Reach 500 Reputation within 31 DAYS to impress Astra Yao!
+---
+### Stats
+* Money: Collect money through recommending tapes to customers.
+* Reputation: Gain reputation by helping out customers and choosing the right decision in side quests.
+
+### Mechanics
+* Energy bar: Actions cost energy, think carefully on how you go through each day. Hitting 0 energy can cause the days to be skipped.
+* Daily prep slots: Each day is limited to 5 tasks.
+* Messiness bar: Shipments of tapes can be messy, clean up the store with energy to prevent a decrease in reputation.
+* Inventory: Ensure that you have enough tapes to sell in the store.
+* Customer Recommendations: Help out customers to collect money and gain reputation when recommending the genre tape they want.
+* Side Quests: Small chance of random side quests to occur when opening the shop for the day.
+* Black Market: Takes up the entirety of the day. Take the risk of using your energy to buy valuable tapes or sell your low-priced tapes for double its value!
+
+
+
+
+
+## Reach the value of $500 dollars with a reputation of 400 to receive the special achievement!
