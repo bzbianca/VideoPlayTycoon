@@ -4,16 +4,19 @@ A strategic business simulation built in Java. Take on the role of a Video Store
 
 ---
 
-## 🚀 How to Download and Run
+## How to Download and Run
 
 ### 1. Project Structure
+
+### 2. Download ZIP File from the Github
+
 Ensure your project folder contains the following four Java files and this README:
 * `GameEngine.java` (The main controller and entry point)
 * `InventoryManager.java` (Logic for stock and shelf organization)
 * `Movie.java` (The data model for video tapes)
 * `Box.java` (The container for processing shipments)
 
-### 2. Compilation
+### 3. Compilation
 Open your terminal in your IDE, navigate to the folder containing the files, and run:
 javac *.java
 java GameEngine
