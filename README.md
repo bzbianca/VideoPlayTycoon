@@ -6,9 +6,9 @@ A strategic business simulation built in Java. Take on the role of a Video Store
 
 ## How to Download and Run
 
-### 1. Project Structure
+### 1. Download ZIP File from the Github
 
-### 2. Download ZIP File from the Github
+### 2. Project Structure
 
 Ensure your project folder contains the following four Java files and this README:
 * `GameEngine.java` (The main controller and entry point)
