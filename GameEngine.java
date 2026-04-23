@@ -49,7 +49,7 @@ public class GameEngine {
     private String getMessBar() {
         int val = inv.getDisorderLevel();
         int bars = Math.min(val / 2, 10);
-        StringBuilder bar = new StringBuilder("["); // Fixed compilation error here
+        StringBuilder bar = new StringBuilder("["); 
         for (int i = 0; i < 10; i++) bar.append((i < bars) ? "!" : ".");
         return bar.toString() + "] " + val + "/20";
     }
@@ -64,7 +64,7 @@ public class GameEngine {
             if (evelynArriving) {
                 System.out.println("\n" + "=".repeat(60));
                 System.out.println("!!! UNEXPECTED VISITOR AT THE FRONT DOOR !!!");
-                System.out.println("EVELYN: \"Manager, I've been watching you from afar and Astra");
+                System.out.println("EVELYN: \"Hey Manager! I am Evelyn, Miss Yao's bodyguard and manager. And I've been watching you from afar and Astra");
                 System.out.println("said that you deserve the early endorsement of coming to");
                 System.out.println("the concert afterall! You've done incredible work here.\"");
                 System.out.println("=".repeat(60));
@@ -119,7 +119,6 @@ public class GameEngine {
 
     private int preOpenPhase() {
         while (true) {
-            // Auto-exhaustion and Prep Slot reset logic
             if (energy <= 0 || actionsLeft <= 0) {
                 System.out.println("\n>> STATUS CHANGE: +20 energy due to exhaustion");
                 energy = Math.min(100, Math.max(0, energy) + 20);
@@ -232,13 +231,11 @@ public class GameEngine {
     private void triggerSideQuest() {
         int roll = rnd.nextInt(100);
         if (roll < 15) { 
-            System.out.println("\n[QUEST] Eous is buzzing around the shop with a holographic projector.");
-            if (getYesNo("Eous", "En-na-na? (I can help with the atmosphere and take some stress off you for $40?)")) {
-                if (balance >= 40) {
-                    balance -= 40; energy = Math.min(100, energy + 25);
+            System.out.println("\n[QUEST] Eous is buzzing around the shop with a dust cleaner.");
+            if (getYesNo("Eous", "En-na-na? (I can help with the atmosphere of the store and take some stress off you!)")) {
                     reputation += 20; inv.organize();
-                    System.out.println(">> STATUS: Eous boosts morale! +25 Energy, +20 Rep, Mess Cleared.");
-                }
+                    if (energy < 100) { energy = Math.min(100, energy + 25);}
+                    System.out.println(">> STATUS: Eous boosts morale! +25 Energy, +20 Rep.");
             }
         } else if (roll < 45) { 
             System.out.println("\n[QUEST] Nicole is leaning on the counter with a suspicious 'investment' flyer.");
@@ -247,7 +244,7 @@ public class GameEngine {
             }
         } else if (roll < 75) { 
             System.out.println("\n[QUEST] Anby is staring at the burger shop across the street while holding a stack of flyers.");
-            if (getYesNo("Anby", "Manager... my blood-sugar levels are dropping. If you fund my burger lunch ($30), I will spread the word about this store during my meal.")) {
+            if (getYesNo("Anby", "Manager... I can go for a burger right now. If you get me my burger ($30), I will spread the word about the store when I go on my lunch break.")) {
                 if (balance >= 30) { balance -= 30; reputation += 25; System.out.println(">> STATUS: Anby eats a burger and tells everyone she meets. +25 Rep, -$30."); }
             }
         }
@@ -259,26 +256,6 @@ public class GameEngine {
     }
 
     private void playDay() {
-        String[] customerScenarios = {
-            " is a tired salaryman rubbing his eyes. ",
-            " is a student with a notebook. ",
-            " looks like they're going on a first date. ",
-            " is a parent with two chaotic kids. ",
-            " is an old collector in a trench coat. ",
-            " is a local biker looking for thrills. "
-        };
-
-        String[] inquiryStyles = {
-            "\"I need to forget today happened. What do you got in the %s genre?\"",
-            "\"I'm doing a project on cinematic history! Do you have any %s tapes?\"",
-            "\"I need something that isn't awkward. Help me find a %s film?\"",
-            "\"Give me something that will keep them quiet. Got any %s movies?\"",
-            "\"I haven't seen this title in thirty years... Show me your %s selection.\"",
-            "\"Something with loud engines and explosions! What's the best %s you have?\"",
-            "\"I'm in the mood for something specific. Where is the %s section?\"",
-            "\"Manager, recommend me your finest %s tape.\""
-        };
-
         System.out.println("\n--- [ SHOP OPEN ] ---");
         for (int i = 0; i < 3; i++) {
             List<Movie> currentShelf = inv.getShelf();
@@ -286,9 +263,112 @@ public class GameEngine {
             
             showInventory();
             String name = characterNames[rnd.nextInt(characterNames.length)];
-            String scenario = customerScenarios[rnd.nextInt(customerScenarios.length)];
+            
+            String scenario;
+            switch (name) {
+                case "Anby": scenario = " is quietly humming while checking the expiration date on a burger wrapper. "; break;
+                case "Nicole": scenario = " is aggressively calculating her debts on a gold-plated calculator. "; break;
+                case "Billy": scenario = " is strike-posing and practicing his 'Starlight Knight' transformation. "; break;
+                case "Anton": scenario = " is flexing his drill-arm while complaining about 'lack of spirit' in modern films. "; break;
+                case "Ben": scenario = " is carefully adjusting his glasses and checking the store's architectural integrity. "; break;
+                case "Koleda": scenario = " is standing on a crate so she can see over the counter properly. "; break;
+                case "Grace": scenario = " is staring intensely at your Bangboo, wondering if she can take it apart. "; break;
+                case "Lycaon": scenario = " is elegantly adjusting his tie and waiting with perfect posture. "; break;
+                case "Ellen": scenario = " is leaning against the wall, looking like she’d rather be literally anywhere else. "; break;
+                case "Rina": scenario = " is floating slightly off the ground, followed by two giggling dolls. "; break;
+                case "Corin": scenario = " is clutching her chainsaw-bag and apologizing for 'taking up space'. "; break;
+                case "Zhu Yuan": scenario = " is scanning the room for safety violations and taking official notes. "; break;
+                case "Qingyi": scenario = " is spinning her staff and speaking in cryptic, old-fashioned metaphors. "; break;
+                case "Jane": scenario = " is playing with a coin and giving you a look that makes you feel very nervous. "; break;
+                case "Seth": scenario = " is standing at attention and trying very hard to look professional. "; break;
+                case "Nekomata": scenario = " is perched on top of a shelf, swiping playfully at a dangling wire. "; break;
+                case "Soldier 11": scenario = " is observing the store as if it were a high-stakes tactical battlefield. "; break;
+                case "Soukaku": scenario = " is trying to see if any of the tapes are edible (they aren't). "; break;
+                case "Lucy": scenario = " is being followed by three small boars wearing tiny baseball caps. "; break;
+                case "Piper": scenario = " is yawning widely and looks like she might fall asleep mid-sentence. "; break;
+                case "Miyabi": scenario = " is radiating an aura of cold authority that makes the room feel chilly. "; break;
+                case "Harumasa": scenario = " is checking his reflection in a tape cover and fixing his hair. "; break;
+                case "Yanagi": scenario = " is looking over the store's efficiency and nodding to herself. "; break;
+                case "Lighter": scenario = " is shadow-boxing in the Action aisle with intense focus. "; break;
+                case "Caesar": scenario = " is standing tall, looking like she’s ready to lead a parade. "; break;
+                case "Burnice": scenario = " is looking at the posters and wondering if they'd look better with more fire. "; break;
+                case "Nangong Yu": scenario = " is examining the shelf labels for any grammatical errors. "; break;
+                case "Sunna": scenario = " is quietly observing the customers with a gentle smile. "; break;
+                case "Aria": scenario = " is humming a melody that sounds like a classical opera. "; break;
+                case "Zhao": scenario = " is standing stiffly, looking for anything out of the ordinary. "; break;
+                case "Ye Shunguang": scenario = " is checking his watch and looking slightly impatient. "; break;
+                case "Dialyn": scenario = " is taking a photo of a retro tape cover for her collection. "; break;
+                case "Banyue": scenario = " is looking at the Family section with a nostalgic expression. "; break;
+                case "Lucia": scenario = " is wearing a very fashionable coat and judging the store's decor. "; break;
+                case "Manato": scenario = " is looking for a tape that will help him relax after a long shift. "; break;
+                case "Yidhari": scenario = " is moving gracefully between the aisles like a shadow. "; break;
+                case "Seed": scenario = " is standing very still, almost like a statue, in the corner. "; break;
+                case "Orphie": scenario = " is looking through the Horror section with a brave face. "; break;
+                case "Yuzuha": scenario = " is writing something down in a small, leather-bound notebook. "; break;
+                case "Alice": scenario = " is spinning around in circles, looking very energetic. "; break;
+                case "Pan Yinhu": scenario = " is examining the Action tapes with a critical eye. "; break;
+                case "Yixuan": scenario = " is quietly browsing the Documentary section. "; break;
+                case "Ju Fufu": scenario = " is holding a lucky charm and looking for a happy movie. "; break;
+                case "Vivian": scenario = " is checking the lighting of the store for her next vlog. "; break;
+                case "Hugo": scenario = " is looking for a tape that features fast cars. "; break;
+                case "Pulchra": scenario = " is admiring the artistic design of the old retro covers. "; break;
+                case "Trigger": scenario = " is checking the security cameras and nodding at you. "; break;
+                default: scenario = " is browsing the aisles with an interested expression. "; break;
+            }
+
             String goal = currentShelf.get(rnd.nextInt(currentShelf.size())).getGenre();
-            String inquiry = String.format(inquiryStyles[rnd.nextInt(inquiryStyles.length)], goal);
+            
+            String inquiry;
+            switch (name) {
+                case "Anby": inquiry = "\"Manager... do you have any " + goal + " tapes? I need something to watch during my burger break.\""; break;
+                case "Nicole": inquiry = "\"Out of the way! I need a " + goal + " tape that I can resell—I mean, for personal study!\""; break;
+                case "Billy": inquiry = "\"MANAGER! To truly understand a hero, I must study the finest " + goal + " tapes you have!\""; break;
+                case "Anton": inquiry = "\"Hey! Show me where you keep the " + goal + " section. I need something with real SPIRIT!\""; break;
+                case "Ben": inquiry = "\"Excuse me. I am looking for a " + goal + " film for our break room. Safety first, of course.\""; break;
+                case "Koleda": inquiry = "\"Don't look down at me! Just show me the " + goal + " tapes already!\""; break;
+                case "Grace": inquiry = "\"I wonder how the internal mechanism of a " + goal + " projector works... Show me a tape!\""; break;
+                case "Lycaon": inquiry = "\"Good day. I require a " + goal + " masterpiece to maintain the household's refined atmosphere.\""; break;
+                case "Ellen": inquiry = "\"...Whatever. Just give me a " + goal + " tape. I'm on my break.\""; break;
+                case "Rina": inquiry = "\"Oh dear, my friends are bored. Do you have any lovely " + goal + " films for us?\""; break;
+                case "Corin": inquiry = "\"I'm s-sorry! Please don't be mad! I just... I really wanted to see a " + goal + " movie!\""; break;
+                case "Zhu Yuan": inquiry = "\"Official business. I need to review a " + goal + " tape for... case purposes. Yes, for the case.\""; break;
+                case "Qingyi": inquiry = "\"Old souls often seek wisdom in the " + goal + " arts. Show me what has stood the test of time.\""; break;
+                case "Jane": inquiry = "\"Care to play a game? Or perhaps just point me toward the " + goal + " tapes... if you can focus.\""; break;
+                case "Seth": inquiry = "\"Reporting for duty! I'm here to purchase one " + goal + " tape for study, sir!\""; break;
+                case "Nekomata": inquiry = "\"Is the " + goal + " section over here? I feel like watching something fast-paced!\""; break;
+                case "Soldier 11": inquiry = "\"Identify the " + goal + " sector immediately. This is a high-priority mission.\""; break;
+                case "Soukaku": inquiry = "\"If I watch a " + goal + " movie, will it make me less hungry? Actually, never mind, just give me one!\""; break;
+                case "Lucy": inquiry = "\"Listen up, Manager! Bring me your most prestigious " + goal + " tape at once!\""; break;
+                case "Piper": inquiry = "\"...Yawn... You got any of those " + goal + " things? I need something to do while the truck cools.\""; break;
+                case "Miyabi": inquiry = "\"I need a " + goal + " tape. This is of course for my training. Training on " + goal + " tapes.\""; break;
+                case "Harumasa": inquiry = "\"A stylish hero needs a stylish " + goal + " movie. What's your best one?\""; break;
+                case "Yanagi": inquiry = "\"Efficiency is key. Show me your most popular " + goal + " tape so I don't waste time.\""; break;
+                case "Lighter": inquiry = "\"I need a " + goal + " tape that's got some real punch to it! What've you got?\""; break;
+                case "Caesar": inquiry = "\"A leader must understand all walks of life. Show me your " + goal + " collection!\""; break;
+                case "Burnice": inquiry = "\"Do you have any " + goal + " movies with big explosions? I love the heat!\""; break;
+                case "Nangong Yu": inquiry = "\"I require a " + goal + " film for research. Please ensure it is the uncut version.\""; break;
+                case "Sunna": inquiry = "\"Could you help me find a " + goal + " movie that's peaceful to watch?\""; break;
+                case "Aria": inquiry = "\"The rhythm of a " + goal + " story is so unique. Do you have any recommendations?\""; break;
+                case "Zhao": inquiry = "\"I'm on a mission for a " + goal + " tape. Point the way.\""; break;
+                case "Ye Shunguang": inquiry = "\"I'm in a hurry. Just give me your best " + goal + " tape and I'll be on my way.\""; break;
+                case "Dialyn": inquiry = "\"I'm looking for a " + goal + " tape with a really cool cover. What've you got?\""; break;
+                case "Banyue": inquiry = "\"I'd like to see a " + goal + " movie tonight. It's been a while.\""; break;
+                case "Lucia": inquiry = "\"I only watch the most elegant " + goal + " films. I hope you have something suitable.\""; break;
+                case "Manato": inquiry = "\"I need a good " + goal + " movie to decompress. Any suggestions?\""; break;
+                case "Yidhari": inquiry = "\"A " + goal + " story sounds perfect for a quiet night. Show me where they are.\""; break;
+                case "Seed": inquiry = "\"... " + goal + " tape. Please.\""; break;
+                case "Orphie": inquiry = "\"I want to try watching a " + goal + " movie. I hope it's not too scary!\""; break;
+                case "Yuzuha": inquiry = "\"I'm looking for a " + goal + " tape to study for my next project.\""; break;
+                case "Alice": inquiry = "\"Do you have anything in " + goal + "? I want something fun to watch!\""; break;
+                case "Pan Yinhu": inquiry = "\"I need a " + goal + " tape that actually has a good plot. Don't disappoint me.\""; break;
+                case "Yixuan": inquiry = "\"I'm interested in the " + goal + " genre. What do you have in stock?\""; break;
+                case "Ju Fufu": inquiry = "\"Will a " + goal + " movie bring me good luck? I'll take one anyway!\""; break;
+                case "Vivian": inquiry = "\"I need a " + goal + " tape that looks good on screen. What's your most aesthetic one?\""; break;
+                case "Hugo": inquiry = "\"Got any " + goal + " movies with fast-paced action? I'm ready!\""; break;
+                case "Pulchra": inquiry = "\"I love the art style of " + goal + " films. Which one do you recommend?\""; break;
+                case "Trigger": inquiry = "\"I'm checking your " + goal + " section for quality control. I'll take this one.\""; break;
+                default: inquiry = "\"I'm looking for something in the " + goal + " genre. What do you recommend?\""; break;
+            }
 
             System.out.println("\n" + name + scenario);
             System.out.println(name + ": " + inquiry);
@@ -322,16 +402,16 @@ public class GameEngine {
     }
 
     private void showResults(String status) {
-        System.out.println("\n" + "★ ".repeat(15));
+        System.out.println("\n" + "=".repeat(60));
         if (status.equals("VICTORY")) {
-            System.out.println("   ✨ ASTRA YAO'S PLATINUM ENDORSEMENT ✨");
+            System.out.println("   + ASTRA YAO'S ENDORSEMENT +");
             System.out.println("ASTRA YAO: \"I've seen many shops, but this one has soul.");
             System.out.println("Your curation is art, Manager. Well done!\"");
         } else {
             System.out.println("          --- THE SHOP HAS FAILED ---");
-            System.out.println("ASTRA YAO: \"I expected a professional. This was a mess.\"");
+            System.out.println("ASTRA YAO: \"I expected a more from you. But, I guess my invite didn't mean anything to you..\"");
         }
-        System.out.println("★ ".repeat(15));
+        System.out.println("=".repeat(60));
 
         System.out.println("\n--- [ FINAL PERFORMANCE REPORT ] ---");
         System.out.printf("  STATUS:           %s\n", status.replace("_", " "));
@@ -347,7 +427,8 @@ public class GameEngine {
         System.out.printf("  REP CHANGE:       %+d\n", (reputation - initialRep));
         System.out.println("-".repeat(40));
         System.out.printf("Days Survived: %d | Final Rep: %d | Net Profit: $%.2f\n", day-1, reputation, (totalRevenue - totalSpent));
-        System.out.println("#".repeat(60));
+        System.out.println();
+        System.out.println("=".repeat(60));
     }
 
     private Box generateBox() {
