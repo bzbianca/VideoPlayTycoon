@@ -409,7 +409,7 @@ public class GameEngine {
             System.out.println("Your curation is art, Manager. Well done!\"");
         } else {
             System.out.println("          --- THE SHOP HAS FAILED ---");
-            System.out.println("ASTRA YAO: \"I expected a more from you. But, I guess my invite didn't mean anything to you..\"");
+            System.out.println("ASTRA YAO: \"I expected more from you. It looks like you really don't care about my concerts..\"");
         }
         System.out.println("=".repeat(60));
 
