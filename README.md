@@ -18,5 +18,7 @@ Ensure your project folder contains the following four Java files and this READM
 
 ### 3. Compilation
 Open your terminal in your IDE, navigate to the folder containing the files, and run:
+
 javac *.java
+
 java GameEngine
